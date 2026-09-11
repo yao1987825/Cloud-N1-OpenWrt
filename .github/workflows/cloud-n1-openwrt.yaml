@@ -8,6 +8,7 @@ on:
       - 'README.md'
       - 'script.sh'
       - 'config.sh'
+      - '.config'
   schedule:
     - cron: 0 8 * * 0
 
@@ -96,6 +97,7 @@ jobs:
     - name: Load custom configuration
       run: |
         chmod +x $CONFIG_SH
+        cp -f .config openwrt/.config
         ./$CONFIG_SH
 
     - name: Download package
