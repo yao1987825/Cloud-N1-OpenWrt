@@ -78,11 +78,7 @@ jobs:
 
     - name: Update feeds
       run: |
-        [ -e files ] && mv files openwrt/files
-        chmod +x $SCRIPT_SH
-        ./$SCRIPT_SH
         cd openwrt
-        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
         ./scripts/feeds update -a
         xfsprogs_makefile="feeds/packages/utils/xfsprogs/Makefile"
         if [[ -f "$xfsprogs_makefile" ]]; then
@@ -91,8 +87,11 @@ jobs:
           echo "xfsprogs feed is unavailable; skipping legacy compiler flag adjustment"
         fi
 
-    - name: Install feeds
+    - name: Install custom packages and feeds
       run: |
+        [ -e files ] && mv files openwrt/files
+        chmod +x $SCRIPT_SH
+        ./$SCRIPT_SH
         cd openwrt
         ./scripts/feeds install -a
 
