@@ -29,6 +29,8 @@ jobs:
   build_openwrt:
     name: Build OpenWrt and release
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
 
     steps:
 
@@ -189,7 +191,7 @@ jobs:
         allowUpdates: true
         tag: ${{ env.tag_name }}
         commit: main
-        token: ${{ secrets.actions_release }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         body: |
           编译使用版本:
           ${{ env.useVersionInfo }}
@@ -206,4 +208,4 @@ jobs:
         keep_latest: 3
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.actions_release }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
