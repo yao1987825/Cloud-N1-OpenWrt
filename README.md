@@ -154,9 +154,9 @@ Create release (GitHub Release)
 
 ## 刷机信息
 
-- **默认 IP**: `192.168.1.1`
+- **默认 IP**: `192.168.6.1`
 - **默认用户名**: `root`
-- **默认密码**: `password`
+- **默认密码**: `3971247`
 
 ---
 
@@ -170,6 +170,11 @@ Create release (GitHub Release)
 ## 更新日志
 
 ### 2026-09-12
+- 默认IP由 `192.168.1.1` 修改为 `192.168.6.1`（`.config` 中 `CONFIG_TARGET_PREINIT_IP`）
+- 默认密码由 `password` 修改为 `3971247`（通过 `files/etc/shadow` 预置）
+- 修改涉及文件：
+  - `.config`: `CONFIG_TARGET_PREINIT_IP="192.168.6.1"`, `CONFIG_TARGET_PREINIT_BROADCAST="192.168.6.255"`
+  - `files/etc/shadow`: 预置 root 密码哈希
 - 修正 armvirt → armsr 架构重命名问题
 - 修复 ksmbd 与内核 6.12 不兼容
 - 修复 combined-efi.img.gz 编译失败

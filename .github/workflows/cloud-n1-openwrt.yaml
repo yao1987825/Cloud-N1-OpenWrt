@@ -187,19 +187,18 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} ❤️ | N1-OpenWrt 自动编译打包
+        name: N1-OpenWrt ${{ env.tag_name }}
         allowUpdates: true
         tag: ${{ env.tag_name }}
         commit: main
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
-          编译使用版本:
-          ${{ env.useVersionInfo }}
-
-          刷机固件简介：
-            打包日期：${{ env.PACKAGED_OUTPUTDATE }}
-            内核版本：${{ env.KERNEL_VERSION }}
-            默认IP：192.168.1.1 默认用户名密码： root/password
+          **版本**: ${{ env.tag_name }}
+          **更新内容**:
+          - 内核版本: ${{ env.KERNEL_VERSION }}
+          - 默认IP: 192.168.6.1
+          - 默认密码: 3971247
+          - 基于 Lean LEDE ${{ env.useVersionInfo }}
         artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
 
     - name: Remove old Releases
