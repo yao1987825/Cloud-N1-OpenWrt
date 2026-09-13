@@ -169,12 +169,14 @@ Create release (GitHub Release)
 
 ## 更新日志
 
+### 2026-09-14
+- 默认IP由 `192.168.1.1` 修改为 `192.168.6.1`
+- 默认密码由 `password` 修改为 `3971247`
+- 修改文件：`.config`, `files/etc/shadow`, `.github/workflows/cloud-n1-openwrt.yaml`
+- GitHub Actions 工作流改为手动触发
+- Release 简介简化为版本号 + 更新内容
+
 ### 2026-09-12
-- 默认IP由 `192.168.1.1` 修改为 `192.168.6.1`（`.config` 中 `CONFIG_TARGET_PREINIT_IP`）
-- 默认密码由 `password` 修改为 `3971247`（通过 `files/etc/shadow` 预置）
-- 修改涉及文件：
-  - `.config`: `CONFIG_TARGET_PREINIT_IP="192.168.6.1"`, `CONFIG_TARGET_PREINIT_BROADCAST="192.168.6.255"`
-  - `files/etc/shadow`: 预置 root 密码哈希
 - 修正 armvirt → armsr 架构重命名问题
 - 修复 ksmbd 与内核 6.12 不兼容
 - 修复 combined-efi.img.gz 编译失败
