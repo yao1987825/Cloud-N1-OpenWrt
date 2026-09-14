@@ -182,12 +182,16 @@ jobs:
         commit: main
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
-          **版本**: ${{ env.tag_name }}
-          **更新内容**:
+          **N1-OpenWrt ${{ env.tag_name }}**
+
+          **刷机信息**
+          - 默认IP: `192.168.6.1`
+          - 默认用户名: `root`
+          - 默认密码: `3971247`
+
+          **固件信息**
           - 内核版本: ${{ env.KERNEL_VERSION }}
-          - 默认IP: 192.168.6.1
-          - 默认密码: 3971247
-          - 基于 Lean LEDE ${{ env.useVersionInfo }}
+          - 源码: Lean LEDE
         artifacts: "${{ env.FIRMWARE }}/*.*,${{ env.PACKAGED_OUTPUTPATH }}/*.*"
 
     - name: Remove old Releases
