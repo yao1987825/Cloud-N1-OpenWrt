@@ -172,8 +172,8 @@ Create release (GitHub Release)
 ### 2026-09-14
 - 默认IP由 `192.168.1.1` 修改为 `192.168.6.1`
 - 默认密码由 `password` 修改为 `3971247`
-- 修复N1 WiFi固件加载失败：添加 `cypress-nvram-43455-sdio`，移除冲突的 `brcmfmac-nvram-43455-sdio`
-- 修改文件：`.config`, `files/etc/shadow`, `.github/workflows/cloud-n1-openwrt.yaml`
+- 修复N1 WiFi固件加载失败：系统查找 `brcmfmac43455-sdio.phicomm,n1.bin`，但固件包只有 `brcmfmac43455-sdio.bin`，通过 `files/lib/firmware/brcm/` 创建符号链接解决
+- 修改文件：`.config`, `files/etc/shadow`, `files/lib/firmware/brcm/`, `.github/workflows/cloud-n1-openwrt.yaml`
 - GitHub Actions 工作流改为手动触发
 - Release 简介简化为版本号 + 更新内容
 
