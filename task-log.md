@@ -68,11 +68,11 @@
 
 ### 2026-09-18 修改默认IP地址
 
-**任务目标**：将默认LAN IP从 `192.168.1.1` 改为 `10.10.10.250`
+**任务目标**：将默认LAN IP从 `192.168.1.1` 改为 `10.10.10.1`
 
 **修改内容**：
 - 创建 `files/etc/config/network` 配置文件
-- LAN IP: `10.10.10.250`
+- LAN IP: `10.10.10.1`
 - 子网掩码: `255.255.255.0`
 
 ---
@@ -117,6 +117,26 @@
 - 为LAN接口启用DHCP服务器
 - IP池范围: `10.10.10.100` - `10.10.10.249` (150个地址)
 - 租约时间: `12h`
+
+---
+
+### 2026-09-18 修复WiFi SSID被brcmfmac固件覆盖问题
+
+**问题现象**：
+- 修改wireless配置的SSID为`OpenWrt-5G`后，刷机后仍显示`phicomm-n1`
+- WiFi无法获取IP
+
+**问题原因**：
+- 斐讯N1使用BCM43455 WiFi芯片（SDIO接口）
+- brcmfmac驱动加载时从`brcmfmac43455-sdio.txt`读取默认SSID配置
+- 该txt文件中硬编码了SSID为`phicomm-n1`
+- N1的wireless配置被firmware覆盖
+
+**修复方案**：
+1. 创建 `files/etc/uci-defaults/99-wireless-fix` 脚本
+2. 在首次启动时强制覆盖无线配置
+3. 设置SSID为`OpenWrt-5G`，密码`3971247`
+4. wifi reload 重新加载配置
 
 ---
 

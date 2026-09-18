@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# 强制设置WiFi配置 - 解决brcmfmac驱动SSID被覆盖问题
+
+# 等待WiFi驱动加载
+sleep 5
+
+# 设置5G WiFi配置
+uci -q batch << EOF
+set wireless.radio0.disabled='0'
+set wireless.radio0.country='CN'
+set wireless.radio0.channel='36'
+set wireless.radio0.band='5g'
+set wireless.radio0.htmode='HT40'
+
+set wireless.default_radio0.device='radio0'
+set wireless.default_radio0.network='lan'
+set wireless.default_radio0.mode='ap'
+set wireless.default_radio0.ssid='OpenWrt-5G'
+set wireless.default_radio0.encryption='sae-mixed'
+set wireless.default_radio0.key='3971247'
+set wireless.default_radio0.disabled='0'
+
+commit wireless
+EOF
+
+# 重启WiFi
+wifi reload
+
+exit 0
